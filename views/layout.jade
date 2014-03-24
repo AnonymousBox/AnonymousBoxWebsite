@@ -17,4 +17,11 @@ html(ng-app='Anonymousbox')
     body(ng-controller='MessagesCtrl')
         div#glitcharea
             block content
-
+    script.
+        $(document).ready(function(){
+        $('img').resizecrop({
+                width:40,
+                height:60,
+                vertical:"top"
+            });  
+        });  

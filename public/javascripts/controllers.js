@@ -5,10 +5,12 @@ function MessagesCtrl($scope, $http){
         success(function(data,status,headers,config){
             console.log("got messages: ", data);
             $scope.messages = data;
-            glitch();
+            $scope.glitch = true;
+             
+            //glitch();
         });
     var glitch = function(){
-        var sglitch = $scope.glitch
+        var sglitch = $scope.glitch;
         $scope.$apply(function(){
             $scope.glitch = !$scope.glitch;
             console.log("glitch is ", $scope.glitch);
