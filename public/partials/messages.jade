@@ -8,18 +8,19 @@
                     <h1>Message: {{message.message}}</h1>
                 </div>
                 <div ng-if="glitch">
-                    <div class="picturecontainer">
-                        <div ng-repeat='pictureurl in message.pictureurls'>
-                            <div class="crop">
+                    <br>
+                    <div class="picturecontainer row" >
+                            <div class="crop col-xs-4 center-block" ng-repeat='pictureurl in message.pictureurls'>
                                 <img class="rimg" src="/images/{{pictureurl}}">     
                             </div>
-                        </div>
                     </div>
+                    <br>
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 leftside">
                             <h2>Message Sent: {{message.message}} </h2>
+                            <h2>Outside Temperature: {{message.temperature}} </h2>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 rightside">
                             <h2>Stayed for {{message.staytime}} seconds</h2>
                             <h2>Spent {{message.staytime}} seconds writing the message</h2>
                     </div>
