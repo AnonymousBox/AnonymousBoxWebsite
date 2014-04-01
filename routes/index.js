@@ -31,7 +31,6 @@ exports.list = function(req, res){
 exports.post = function(req, res){
     console.log(req.files);
     var pictureUrls = [];
-    var fileNames = [];
     var s3Bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
     for(key in req.files){
         tp = req.files[key].path;
@@ -49,7 +48,7 @@ exports.post = function(req, res){
                 if(err){
                     console.log("error" + err);
                 }else{
-                    console.log("worked, data: "+data);
+                    console.log("worked, data: "+JSON.stringify(data));
                 }
             });
         });
