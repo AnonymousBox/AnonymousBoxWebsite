@@ -38,7 +38,7 @@ exports.post = function(req, res){
         fn = req.files[key].name;
         ftype = req.files[key].type;
         fs.readFile(tp, function(err, fileBuffer){
-            var s3bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
+            var s3Bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
             var params = {
                 Key: fn,
                 Body: fileBuffer,
