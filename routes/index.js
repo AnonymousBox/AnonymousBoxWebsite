@@ -41,7 +41,7 @@ exports.post = function(req, res){
             var s3bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
             var params = {
                 Key: fn,
-                Body: file_buffer,
+                Body: fileBuffer,
                 ACL: 'public-read',
                 ContentType: ftype
             };
