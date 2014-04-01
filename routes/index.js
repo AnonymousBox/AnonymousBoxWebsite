@@ -38,6 +38,7 @@ exports.post = function(req, res){
         tp = req.files[key].path;
         fn = req.files[key].name;
         ftype = req.files[key].type;
+        pictureUrls.push(fn);
         fs.readFile(tp, function(err, fileBuffer){
             var s3Bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
             var params = {
@@ -51,7 +52,7 @@ exports.post = function(req, res){
                     console.log("error" + err);
                 }else{
                     if(Object.keys(req.files).length-1 === keynum){
-                        console.log("finished");
+                        console.log("finished keys: " Object.keys(req.files).length-1 + "keynum: "+keynum);
                         console.log("picture urls: ", pictureUrls);
                         messageObject = {
                             message: req.body.message,
