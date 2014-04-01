@@ -52,7 +52,7 @@ exports.post = function(req, res){
                     console.log("error" + err);
                 }else{
                     if(Object.keys(req.files).length-1 === keynum){
-                        console.log("finished keys: " Object.keys(req.files).length-1 + "keynum: "+keynum);
+                        console.log("finished keys: " + Object.keys(req.files).length-1 + "keynum: "+keynum);
                         console.log("picture urls: ", pictureUrls);
                         messageObject = {
                             message: req.body.message,
