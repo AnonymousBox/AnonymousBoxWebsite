@@ -31,16 +31,14 @@ exports.list = function(req, res){
 exports.post = function(req, res){
     console.log(req.files);
     var pictureUrls = [];
-    var tempPaths = [];
     var fileNames = [];
-    var keynum = 0;
+    var s3Bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
     for(key in req.files){
         tp = req.files[key].path;
         fn = req.files[key].name;
         ftype = req.files[key].type;
         pictureUrls.push(fn);
         fs.readFile(tp, function(err, fileBuffer){
-            var s3Bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
             var params = {
                 Key: fn,
                 Body: fileBuffer,
@@ -51,29 +49,27 @@ exports.post = function(req, res){
                 if(err){
                     console.log("error" + err);
                 }else{
-                    if(Object.keys(req.files).length-1 === keynum){
-                        console.log("finished keys: " + Object.keys(req.files).length-1 + "keynum: "+keynum);
-                        console.log("picture urls: ", pictureUrls);
-                        messageObject = {
-                            message: req.body.message,
-                            staytime: req.body.staytime,
-                            pictureurls: pictureUrls
-                        };
-                        var postMessage = new MessageModel(messageObject);
-                        postMessage.save(function(err, doc){
-                            if(err || !doc){
-                                throw 'Error';
-                            }else{
-                                console.log("created");
-                                console.log(doc);
-                                res.json(doc);
-                            }
-                        });
-                    }
-                    ++keynum;
+                    console.log("worked, data: "+data);
                 }
             });
         });
+        console.log("picture urls: ", pictureUrls);
+        messageObject = {
+            message: req.body.message,
+            staytime: req.body.staytime,
+            pictureurls: pictureUrls
+        };
+        var postMessage = new MessageModel(messageObject);
+        postMessage.save(function(err, doc){
+            if(err || !doc){
+                throw 'Error';
+            }else{
+                console.log("created");
+                console.log(doc);
+                res.json(doc);
+            }
+        });
+//this is the old code, not dependent on amazon s3
 //      pictureUrls.push(fn);
 //      var targetPath = path.resolve('./public/images/'+fn);
 //      fs.rename(tp, targetPath, function(err,doc) {
