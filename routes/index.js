@@ -66,7 +66,7 @@ exports.post = function(req, res){
             }else{
                 console.log("created");
                 console.log(doc);
-                res.json(doc);
+        //        res.json(doc);
             }
         });
 //this is the old code, not dependent on amazon s3
