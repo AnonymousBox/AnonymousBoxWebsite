@@ -53,6 +53,7 @@ exports.post = function(req, res){
                 }
             });
         });
+    }
         console.log("picture urls: ", pictureUrls);
         messageObject = {
             message: req.body.message,
@@ -76,7 +77,6 @@ exports.post = function(req, res){
 //          if (err) throw err;
 //          console.log("Upload completed!: ", doc);
 //      });
-    }
 };
 exports.getmessages = function(req, res){
     MessageModel.find().sort({_id:-1}).exec(function(err, docs){
