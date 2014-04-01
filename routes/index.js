@@ -47,7 +47,7 @@ exports.post = function(req, res){
             };
             s3Bucket.putObject(params, function(err, data){
                 if(err){
-                    console.log("error");
+                    console.log("error" + err);
                 }else{
                     if(Object.keys(req.files).length-1 === keynum){
                         console.log("finished");
