@@ -6,10 +6,11 @@ var path = require('path');
 
 var fs = require('fs');
 var AWS = require('aws-sdk');
-AWS.config.region = 'us-west-2';
+AWS.config.update({
+      accessKeyId: process.env.AWS_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_SECRET_KEY
+});
 
-var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
-var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var average = 0;
 var getAverage = function(){
     var staytimes = 0;
