@@ -28,43 +28,39 @@ var getAverage = function(){
 exports.list = function(req, res){
     res.render('index.jade');
 };
-postFilesToS3 = function(files){
-    console.log("files "+files);
-    for(var i = 0; i < files.length; ++i){
+postFileToS3 = function(file){
         var s3Bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
-        var tp = files[i]["tp"];
-        var fn = files[i]["fn"];
-        var ftype= files[i]["ftype"];
+        var tp = file["tp"];
+        var fn = file["fn"];
+        var ftype= file["ftype"];
         console.log("tp: "+ tp);
         fs.readFile(tp, function(err, fileBuffer){
-                console.log("rf tp: "+tp);
-                var params = {
-                    Key: fn,
-                    Body: fileBuffer,
-                    ACL: 'public-read',
-                    ContentType: ftype
-                };
-                s3Bucket.putObject(params, function(err, data){
-                    if(err){
-                        console.log("error" + err);
-                    }else{
-                        console.log("worked, data: "+JSON.stringify(data));
-                    }
-                });
+            if(err) throw err;
+            console.log("rf tp: "+tp);
+            var params = {
+                Key: fn,
+                Body: fileBuffer,
+                ACL: 'public-read',
+                ContentType: ftype
+            };
+            s3Bucket.putObject(params, function(err, data){
+                if(err){
+                    console.log("error" + err);
+                }else{
+                    console.log("worked, data: "+JSON.stringify(data));
+                }
+            });
         });
-    }
 }
 exports.post = function(req, res){
     //console.log(req.files);
     var pictureUrls = [];
-    var files = [];
     for(key in req.files){
         var tp = req.files[key].path;
         var fn = req.files[key].name;
         var ftype = req.files[key].ftype;
         pictureUrls.push(fn);
-        files.push({"fn": fn, "tp":tp, "ftype": ftype});
-        console.log("tp: "+ tp);
+        postFileToS3({"fn": fn, "tp":tp, "ftype": ftype});
         
     }
         console.log("picture urls: ", pictureUrls);
@@ -80,7 +76,6 @@ exports.post = function(req, res){
             }else{
                 console.log("created");
                 console.log(doc);
-                postFilesToS3(files);
                 res.json(doc);
             }
         });
