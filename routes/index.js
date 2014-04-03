@@ -31,29 +31,33 @@ exports.list = function(req, res){
 exports.post = function(req, res){
     console.log(req.files);
     var pictureUrls = [];
-    var s3Bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
     for(key in req.files){
+        var s3Bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
         tp = req.files[key].path;
         fn = req.files[key].name;
         ftype = req.files[key].type;
         pictureUrls.push(fn);
         console.log("tp: "+ tp);
         fs.readFile(tp, function(err, fileBuffer){
-            console.log("rf tp: "+tp);
-            var params = {
-                Key: fn,
-                Body: fileBuffer,
-                ACL: 'public-read',
-                ContentType: ftype
-            };
-            console.log("params: "+ params);
-            s3Bucket.putObject(params, function(err, data){
-                if(err){
-                    console.log("error" + err);
-                }else{
-                    console.log("worked, data: "+JSON.stringify(data));
-                }
-            });
+            if(err){
+                console.log("error: "+err);
+            }else{
+                console.log("rf tp: "+tp);
+                var params = {
+                    Key: fn,
+                    Body: fileBuffer,
+                    ACL: 'public-read',
+                    ContentType: ftype
+                };
+                console.log("params: "+ params);
+                s3Bucket.putObject(params, function(err, data){
+                    if(err){
+                        console.log("error" + err);
+                    }else{
+                        console.log("worked, data: "+JSON.stringify(data));
+                    }
+                });
+            }
         });
     }
         console.log("picture urls: ", pictureUrls);
