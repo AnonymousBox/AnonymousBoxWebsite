@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var db = mongoose.connect("mongodb://heroku_app23600264:me3iomdcu8pcpmlle5qhic2gqt@ds035448.mongolab.com:35448/heroku_app23600264");
+var db = mongoose.connect(process.env.MONGOLAB_URI);
 var MessageSchema = require('../models/messageObjectSchema.js').MessageSchema;
 var MessageModel = db.model('MessageSchema', MessageSchema);
 var path = require('path');
