@@ -39,7 +39,7 @@ postFilesToS3 = function(files){
                     Key: files[i]["fn"],
                     Body: fileBuffer,
                     ACL: 'public-read',
-                    ContentType: files[i]ftype
+                    ContentType: files[i]["ftype"]
                 };
                 console.log("params: "+ params);
                 s3Bucket.putObject(params, function(err, data){
