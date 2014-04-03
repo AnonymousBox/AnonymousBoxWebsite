@@ -44,7 +44,6 @@ postFilesToS3 = function(files){
                     ACL: 'public-read',
                     ContentType: ftype
                 };
-                console.log("params: "+ JSON.stringify(params));
                 s3Bucket.putObject(params, function(err, data){
                     if(err){
                         console.log("error" + err);
