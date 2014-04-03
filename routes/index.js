@@ -39,7 +39,7 @@ exports.post = function(req, res){
         pictureUrls.push(fn);
         console.log("tp: "+ tp);
         fs.readFile(tp, function(err, fileBuffer){
-                console.log("rf tp: "+tp);
+                console.log("rf tp: "+req.files[key].path);
                 var params = {
                     Key: fn,
                     Body: fileBuffer,
