@@ -33,9 +33,9 @@ exports.post = function(req, res){
     var pictureUrls = [];
     var s3Bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
     for(key in req.files){
-        tp = req.files[key].path;
-        fn = req.files[key].name;
-        ftype = req.files[key].type;
+        var tp = req.files[key].path;
+        var fn = req.files[key].name;
+        var ftype = req.files[key].type;
         pictureUrls.push(fn);
         console.log("tp: "+ tp);
         fs.readFile(tp, function(err, fileBuffer){
@@ -69,7 +69,7 @@ exports.post = function(req, res){
             }else{
                 console.log("created");
                 console.log(doc);
-        //        res.json(doc);
+                res.json(doc);
             }
         });
 //this is the old code, not dependent on amazon s3
