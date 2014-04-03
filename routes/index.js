@@ -32,17 +32,19 @@ postFilesToS3 = function(files){
     console.log("files "+files);
     for(var i = 0; i < files.length; ++i){
         var s3Bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
-        console.log("nefore tp: "+files[i]["tp"]);
-        a = files[i]["tp"];
-        fs.readFile(a, function(err, fileBuffer){
-                console.log("rf tp: "+a);
+        var tp = files[i]["tp"];
+        var fn = files[i]["fn"];
+        var ftype= files[i]["ftype"];
+        console.log("tp: "+ tp);
+        fs.readFile(tp, function(err, fileBuffer){
+                console.log("rf tp: "+tp);
                 var params = {
-                    Key: files[i]["fn"],
+                    Key: fn,
                     Body: fileBuffer,
                     ACL: 'public-read',
-                    ContentType: files[i]["ftype"]
+                    ContentType: ftype
                 };
-                console.log("params: "+ params);
+                console.log("params: "+ JSON.stringify(params));
                 s3Bucket.putObject(params, function(err, data){
                     if(err){
                         console.log("error" + err);
@@ -59,8 +61,6 @@ exports.post = function(req, res){
     var files = [];
     for(key in req.files){
         var tp = req.files[key].path;
-        var fn = req.files[key].name;
-        var ftype = req.files[key].type;
         pictureUrls.push(fn);
         files.push({"fn": fn, "tp":tp, "ftype": ftype});
         console.log("tp: "+ tp);
