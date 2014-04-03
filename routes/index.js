@@ -37,13 +37,16 @@ exports.post = function(req, res){
         fn = req.files[key].name;
         ftype = req.files[key].type;
         pictureUrls.push(fn);
+        console.log("tp: "+ tp);
         fs.readFile(tp, function(err, fileBuffer){
+            console.log("rf tp: "+tp);
             var params = {
                 Key: fn,
                 Body: fileBuffer,
                 ACL: 'public-read',
                 ContentType: ftype
             };
+            console.log("params: "+ params);
             s3Bucket.putObject(params, function(err, data){
                 if(err){
                     console.log("error" + err);
