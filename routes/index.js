@@ -62,7 +62,7 @@ exports.post = function(req, res){
     for(key in req.files){
         var tp = req.files[key].path;
         var fn = req.files[key].name;
-        var fn = req.files[key].ftype;
+        var ftype = req.files[key].ftype;
         pictureUrls.push(fn);
         files.push({"fn": fn, "tp":tp, "ftype": ftype});
         console.log("tp: "+ tp);
