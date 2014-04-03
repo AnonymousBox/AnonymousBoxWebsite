@@ -28,23 +28,18 @@ var getAverage = function(){
 exports.list = function(req, res){
     res.render('index.jade');
 };
-exports.post = function(req, res){
-    console.log(req.files);
-    var pictureUrls = [];
-    var s3Bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
-    for(key in req.files){
-        var tp = req.files[key].path;
-        var fn = req.files[key].name;
-        var ftype = req.files[key].type;
-        pictureUrls.push(fn);
-        console.log("tp: "+ tp);
+postFilesToS3 = function(files){
+    console.log("files "+files);
+    for(var i = 0; i < files.length; ++i){
+        var s3Bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
+        console.log("nefore tp: "+files[i]["tp"]);
         fs.readFile(tp, function(err, fileBuffer){
-                console.log("rf tp: "+req.files[key].path);
+                console.log("rf tp: "+files[i]["tp"]);
                 var params = {
-                    Key: fn,
+                    Key: files[i]["fn"],
                     Body: fileBuffer,
                     ACL: 'public-read',
-                    ContentType: ftype
+                    ContentType: files[i]ftype
                 };
                 console.log("params: "+ params);
                 s3Bucket.putObject(params, function(err, data){
@@ -55,6 +50,20 @@ exports.post = function(req, res){
                     }
                 });
         });
+    }
+}
+exports.post = function(req, res){
+    //console.log(req.files);
+    var pictureUrls = [];
+    var files = [];
+    for(key in req.files){
+        var tp = req.files[key].path;
+        var fn = req.files[key].name;
+        var ftype = req.files[key].type;
+        pictureUrls.push(fn);
+        files.push({"fn": fn, "tp":tp, "ftype": ftype});
+        console.log("tp: "+ tp);
+        
     }
         console.log("picture urls: ", pictureUrls);
         messageObject = {
@@ -69,6 +78,7 @@ exports.post = function(req, res){
             }else{
                 console.log("created");
                 console.log(doc);
+                postFilesToS3(files);
                 res.json(doc);
             }
         });
