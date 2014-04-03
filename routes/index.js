@@ -33,8 +33,9 @@ postFilesToS3 = function(files){
     for(var i = 0; i < files.length; ++i){
         var s3Bucket = new AWS.S3({params: {Bucket: 'anonybox'}});
         console.log("nefore tp: "+files[i]["tp"]);
-        fs.readFile(files[i]["tp"], function(err, fileBuffer){
-                console.log("rf tp: "+files[i]["tp"]);
+        a = files[i]["tp"];
+        fs.readFile(a, function(err, fileBuffer){
+                console.log("rf tp: "+a);
                 var params = {
                     Key: files[i]["fn"],
                     Body: fileBuffer,
