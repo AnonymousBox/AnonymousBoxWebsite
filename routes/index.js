@@ -67,6 +67,8 @@ exports.post = function(req, res){
         messageObject = {
             message: req.body.message,
             staytime: req.body.staytime,
+            distance: req.body.distance,
+            temperature: req.body.temperature,
             pictureurls: pictureUrls
         };
         var postMessage = new MessageModel(messageObject);
