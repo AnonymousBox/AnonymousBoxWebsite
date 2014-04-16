@@ -4,6 +4,8 @@ var MessageSchema = new mongoose.Schema({
         message: String,
         created: {type: Date, default: new Date()},
         staytime: Number,
+        distance: Number,
+        temperature: Number,
         pictureurls: [String]
     },
     {
