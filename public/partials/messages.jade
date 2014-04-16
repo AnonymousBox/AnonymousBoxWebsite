@@ -10,8 +10,8 @@
                 <div ng-if="glitch">
                     <br>
                     <div class="picturecontainer row" >
-                            <div class="crop col-xs-4 center-block" ng-repeat='pictureurl in message.pictureurls'>
-                                <img class="rimg" src="https://s3.amazonaws.com/anonybox/{{pictureurl}}">     
+                            <div class="crop col-xs-4 center-block rimg" ng-repeat='pictureurl in message.pictureurls'>
+                                <img src="https://s3.amazonaws.com/anonybox/{{pictureurl}}">     
                             </div>
                     </div>
                     <br>
