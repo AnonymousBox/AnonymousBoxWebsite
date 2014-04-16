@@ -6,4 +6,5 @@ $(function(){
            $('.rimg').animate({width: "500px", height: "500px"},500);
         });
     }
+    bindClicks();
 });
