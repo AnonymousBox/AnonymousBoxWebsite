@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var moment = require('moment');
 var MessageSchema = new mongoose.Schema({
         message: String,
-        created: {type: Date, default: new Date()},
+        created: {type: Date, default: Date.now()},
         staytime: Number,
         distance: Number,
         temperature: Number,
