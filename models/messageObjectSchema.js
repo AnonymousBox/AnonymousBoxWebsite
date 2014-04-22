@@ -15,7 +15,7 @@ var MessageSchema = new mongoose.Schema({
 });
 MessageSchema
     .virtual('getDate').get(function(){
-        return moment(this.created).format('MMMM Do YYYY. h:mm:ss a');
+        return moment(this._id.getTimestamp()).format('MMMM Do YYYY. h:mm:ss a');
     });
 
 exports.MessageSchema = MessageSchema;
