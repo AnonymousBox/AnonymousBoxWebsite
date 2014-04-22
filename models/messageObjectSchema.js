@@ -15,7 +15,7 @@ var MessageSchema = new mongoose.Schema({
 });
 MessageSchema
     .virtual('getDate').get(function(){
-        return moment(this._id.getTimestamp()).format('MMMM Do YYYY. h:mm:ss a');
+        return moment(this._id.getTimestamp()).format('MMMM Do YYYY. h:mm:ss a').zone("-03:00");
     });
 
 exports.MessageSchema = MessageSchema;
