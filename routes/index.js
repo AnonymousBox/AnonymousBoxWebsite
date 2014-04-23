@@ -17,14 +17,13 @@ exports.getAverage = function(req,res){
     var staylen = 0
     MessageModel.find({}).select('staytime').exec(function(err, docs){
         docs.forEach(function(e){
-            console.log(parseInt(e.staytime));
             if(e.staytime){
-                staytimes += parseInt(e.staytime);
+                staytimes += parseFloat(e.staytime);
                 staylen++;
+                res.json(staytimes/staylen);
             }
         });
     });
-    res.json(staytimes/staylen);
 }
 exports.list = function(req, res){
     res.render('index.jade');
