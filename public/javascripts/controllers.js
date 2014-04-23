@@ -14,7 +14,7 @@ function MessagesCtrl($scope, $http){
             $scope.average = data;
         });
     $scope.getDeviation=function(initial, average){
-        console.log(initial);
+        console.log(average);
         return parseInt(initial)-parseInt(average);
     }
     var glitch = function(){
