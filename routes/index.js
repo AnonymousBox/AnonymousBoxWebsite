@@ -16,6 +16,7 @@ exports.getAverage = function(req,res){
     var staytimes = 0;
     var staylen = 0
     MessageModel.find({}).select('staytime').exec(function(err, docs){
+        console.log(docs);
         docs.forEach(function(e){
             if(e.staytime){
                 staytimes += parseInt(e.staytime);
