@@ -13,7 +13,7 @@ function MessagesCtrl($scope, $http){
         success(function(data,status,headers,config){
             $scope.average = data;
         });
-    $scope.getDeviation(initial, average){
+    $scope.getDeviation=function(initial, average){
         return parseInt(initial)-parseInt(average);
     }
     var glitch = function(){
