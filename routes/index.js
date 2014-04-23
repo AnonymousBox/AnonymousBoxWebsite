@@ -12,18 +12,18 @@ AWS.config.update({
 });
 
 var average = 0;
-var getAverage = function(){
+exports.getAverage = function(req,res){
     var staytimes = 0;
     var staylen = 0
     MessageModel.find({}).select('staytime').exec(function(err, docs){
         docs.forEach(function(e){
             if(e.staytime){
-                staytimes += e.staytime;
+                staytimes += parseInt(e.staytime);
                 staylen++;
             }
         });
-        return staytimes/staylen
     });
+    res.json(staytimes/staylen);
 }
 exports.list = function(req, res){
     res.render('index.jade');

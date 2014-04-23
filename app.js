@@ -31,6 +31,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.list);
 app.get('/getmessages', routes.getmessages);
 app.post('/post', routes.post);
+app.get('getaverage', routes.getAverage);
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
