@@ -22,7 +22,7 @@
                             <h2>Location: {{message.location}} </h2>
                     </div>
                     <div class="col-xs-6 rightside">
-                            <h2>Spent {{message.staytime}} milliseconds writing the message. {{getDeviation(message.staytime, message.average)}}</h2>
+                            <h2>Spent {{message.staytime}} milliseconds writing the message. {{getDeviation({{message.staytime}}, {{message.average}})}}</h2>
                             <h2>Head was {{message.distance}} inches away from the screen while typing</h2>
                     </div>
                 </div>
