@@ -9,6 +9,13 @@ function MessagesCtrl($scope, $http){
              
             //glitch();
         });
+    $http.get('/getaverages').
+        success(function(data,status,headers,config){
+            $scope.average = data;
+        });
+    $scope.getDeviation(initial, average){
+        return parseInt(initial)-parseInt(average);
+    }
     var glitch = function(){
         var sglitch = $scope.glitch;
         $scope.$apply(function(){
