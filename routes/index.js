@@ -12,7 +12,7 @@ AWS.config.update({
 });
 
 var average = 0;
-exports.getAverage = function(req,res){
+/*exports.getAverage = function(req,res){
     var staytimes = 0;
     var staylen = 0
     MessageModel.find({}).select('staytime').exec(function(err, docs){
@@ -24,7 +24,7 @@ exports.getAverage = function(req,res){
             }
         });
     });
-}
+}*/
 exports.list = function(req, res){
     res.render('index.jade');
 };
