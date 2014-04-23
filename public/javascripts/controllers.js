@@ -9,7 +9,7 @@ function MessagesCtrl($scope, $http){
              
             //glitch();
         });
-    $http.get('/getaverages').
+    $http.get('/getaverage').
         success(function(data,status,headers,config){
             $scope.average = data;
         });
